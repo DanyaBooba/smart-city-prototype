@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MQTT Client</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
 </head>
+
 <body>
     <h1>MQTT Client</h1>
     <div>
@@ -25,7 +27,7 @@
 
     <script type="text/javascript">
         const broker = "test.mosquitto.org";
-        const port = 8080; 
+        const port = 8080;
         const topic = "rafael";
 
         const client = new Paho.MQTT.Client(broker, port, "clientId" + new Date().getTime());
@@ -33,11 +35,11 @@
         client.onConnectionLost = onConnectionLost;
         client.onMessageArrived = onMessageArrived;
 
-        client.connect({onSuccess: onConnect});
+        client.connect({ onSuccess: onConnect });
 
         function onConnect() {
             console.log("Connected to MQTT broker");
-            client.subscribe(topic, {qos: 0});
+            client.subscribe(topic, { qos: 0 });
         }
 
         function onConnectionLost(responseObject) {
@@ -59,7 +61,7 @@
             const message = new Paho.MQTT.Message(messageInput.value);
             message.destinationName = topic;
             client.send(message);
-            messageInput.value = ""; 
+            messageInput.value = "";
         }
 
         function sendMessage2() {
@@ -73,8 +75,9 @@
             const messageInput = document.getElementById("message3");
             const message = new Paho.MQTT.Message(messageInput.value);
             message.destinationName = topic;
-            client.send(message); 
+            client.send(message);
         }
     </script>
 </body>
+
 </html>
