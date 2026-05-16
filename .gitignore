@@ -2,3 +2,5 @@
 node_modules
 __pycache__
 debugjson
+package-lock.json
+.env
