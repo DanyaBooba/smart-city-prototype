@@ -38,4 +38,28 @@ node server
 
 **client**
 
-...
+Запустите Raspberry Pi 4 и выполните следующие инструкции в терминале:
+
+```
+# Установка зависимостей
+pip install paho-mqtt requests
+
+# Для автоматического запуска скрипта
+sudo nano /etc/systemd/system/energo.service
+
+# Вносим в файл
+[Unit]
+Description=Energo MQTT Sync
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /home/pi/energo/main.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+# Активируем
+sudo systemctl enable energo
+sudo systemctl start energo
+```
